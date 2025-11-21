@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVI-BOT - Dashboard Technique Professionnel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Palette de Couleurs Professionnelle avec Animations */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-light: #333333;
+            --shadow-soft: 0 4px 25px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --border-color: #e2e8f0;
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        }
+
+        /* Animations Keyframes Professionnelles */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Professionnel CORRIGÉ - Pas penché */
+        .dashboard-header {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%), 
+                        url('pepper.png') center/cover;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-text .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .date {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Container Principal CORRIGÉ */
+        .questionnaire-container {
+            max-width: 1000px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .questionnaire-container h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInLeft 0.8s ease-out;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .instruction {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+            text-align: center;
+        }
+
+        /* Cartes Modernes avec Animations - CORRIGÉ pour le centrage */
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section:hover::before {
+            width: 6px;
+        }
+
+        .section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+
+        /* Questions Stylisées - CORRIGÉ pour le centrage */
+        .question {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+            width: 100%;
+        }
+
+        .question:hover {
+            background: #f1f5f9;
+            transform: translateX(5px);
+        }
+
+        .question label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        /* Champs de Formulaire Modernes - CORRIGÉ */
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Radio Buttons Modernes - CORRIGÉ pour disposition */
+        .styled-radio-group {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            width: 100%;
+        }
+
+        .styled-radio {
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .styled-radio:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-radio-group input[type="radio"]:checked + .styled-radio {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        /* Slider Personnalisé - CORRIGÉ */
+        .slider-question {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left-color: var(--accent-color);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 10px;
+            background: #e2e8f0;
+            outline: none;
+            margin: 1rem 0;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        #precision-value {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Bouton de Soumission - CORRIGÉ pour centrage */
+        .submit-button {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 2rem auto;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Section Feedback Spéciale */
+        .feedback-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid var(--secondary-color);
+            animation: pulse 2s infinite;
+        }
+
+        .feedback-section .question {
+            background: white;
+            border-left-color: var(--secondary-color);
+        }
+
+        /* Footer Professionnel */
+        .main-footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .footer-attribution {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .footer-project {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Design - CORRIGÉ */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 60px 20px;
+            }
+            
+            .header-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .questionnaire-container {
+                margin: -20px auto 40px;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .styled-radio-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .submit-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section h3 {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        /* Conteneur du formulaire pour bon centrage */
+        .form-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Animation de chargement pour les éléments */
+        .questionnaire-container > * {
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        /* Délais d'animation pour les sections */
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>SERVI-BOT Dashboard Technique</h1>
+                <p class="subtitle">Définition des choix technologiques critiques pour le Système de Service Robotisé</p>
+                <p class="date"><i class="fas fa-calendar-alt"></i> Vendredi 21 novembre 2025 - Session Active</p> 
+				<h2><i class="fas fa-clipboard-list"></i> Questionnaire Technique Détaillé</h2>
+				<p class="instruction">Veuillez remplir ce formulaire technique pour définir l'architecture système.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="questionnaire-container">
+        <div class="form-container">
+            
+            
+            <!-- VOTRE FORMSPREE EST BIEN INTÉGRÉ ICI -->
+            <form id="serviBotForm" method="POST" action="https://formspree.io/f/xvglnepy">
+                
+                <section class="section">
+                    <h3><i class="fas fa-user-edit"></i> Rédacteur / Membre de l'équipe</h3>
+                    <div class="question">
+                        <input type="text" name="redacteur" placeholder="Votre nom complet" required>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3><i class="fas fa-code"></i> A. Technologie Web (Modules 1 et 2)</h3>
+                    
+                    <div class="question">
+                        <label>1. Choix de la Stack</label>
+                        <div class="styled-radio-group">
+                            <input type="radio" id="mern" name="stack" value="MERN" required> 
+                            <label for="mern" class="styled-radio">MERN Stack (React/Node)</label>
+                            
+                            <input type="radio" id="lamp" name="stack" value="LAMP"> 
+                            <label for="lamp" class="styled-radio">LAMP Stack (PHP/MySQL)</label>
+                            
+                            <input type="radio" id="firebase" name="stack" value="Firebase"> 
+                            <label for="firebase" class="styled-radio">Firebase (Serverless)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label>2. Type de Base de Données</label>
+                        <div class="styled-radio-group">
+                            <input type="radio" id="nosql" name="database" value="NoSQL" required> 
+                            <label for="nosql" class="styled-radio">NoSQL (Flexibilité)</label>
+                            
+                            <input type="radio" id="sql" name="database" value="SQL"> 
+                            <label for="sql" class="styled-radio">SQL (Rigueur Transactionnelle)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="notification">3. Technologie de Notification Temps Réel</label>
+                        <select id="notification" name="notification" required>
+                            <option value="">Sélectionner une technologie...</option>
+                            <option value="WebSockets">WebSockets (Socket.io)</option>
+                            <option value="MQTT">MQTT (Over WebSockets)</option>
+                            <option value="ServerSentEvents">Server Sent Events</option>
+                            <option value="LongPolling">Long Polling</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3><i class="fas fa-link"></i> B. Communication Inter-Modules</h3>
+                    
+                    <div class="question">
+                        <label for="protocole">1. Protocole & Ordre de Livraison</label>
+                        <input type="text" id="protocole" name="protocole" placeholder="Ex: HTTP POST, MQTT, WebSocket message" required>
+                    </div>
+                    
+                    <div class="question">
+                        <label for="confirmation">2. Mécanisme de Confirmation (ACK)</label>
+                        <input type="text" id="confirmation" name="confirmation" placeholder="Ex: Réponse 200 OK, Message ACK, QoS 1" required>
+                    </div>
+                    
+                    <div class="question">
+                        <label for="format">3. Format des Données</label>
+                        <input type="text" id="format" name="format" value="JSON" readonly>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3><i class="fas fa-compass"></i> C. Système de Navigation (Module 3)</h3>
+
+                    <div class="question">
+                        <label>1. Choix de la Méthode de Navigation</label>
+                        <div class="styled-radio-group">
+                            <input type="radio" id="suivi_ligne" name="navigation" value="Suivi de ligne" required> 
+                            <label for="suivi_ligne" class="styled-radio">Suivi de ligne (Simple mais intrusif)</label>
+                            
+                            <input type="radio" id="vision" name="navigation" value="Vision/Marqueurs"> 
+                            <label for="vision" class="styled-radio">Vision / Marqueurs (Flexible, RPi)</label>
+                        </div>
+                    </div>
+
+                    <div class="question slider-question">
+                        <label for="precision_necessaire">2. Précision de Déplacement Nécessaire (en cm)</label>
+                        <input type="range" id="precision_necessaire" name="precision_necessaire" min="1" max="10" step="1" value="5">
+                        <div class="slider-labels">
+                            <span>1 cm (Très Précis)</span>
+                            <span id="precision-value">5 cm</span>
+                            <span>10 cm (Moins Précis)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label for="arret_precis">3. Mécanisme d'Arrêt Précis</label>
+                        <input type="text" id="arret_precis" name="arret_precis" placeholder="Ex: Odometrie, Marqueurs de fin de zone, Asservissement PID" required>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3><i class="fas fa-microchip"></i> D. Matériel et Électronique</h3>
+                    
+                    <div class="question">
+                        <label for="unite_controle">1. Unité de Contrôle (Microcontrôleur)</label>
+                        <select id="unite_controle" name="unite_controle" required>
+                            <option value="">Choisir Microcontrôleur...</option>
+                            <option value="ESP32">ESP32 (Wifi/BT natif)</option>
+                            <option value="RPi">Raspberry Pi (OS Linux)</option>
+                            <option value="Arduino">Arduino Uno/Mega (Simplicité)</option>
+                        </select>
+                        <textarea name="justification_controle" rows="2" placeholder="Justification du choix" required style="margin-top: 10px;"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <label>2. Choix des Moteurs</label>
+                        <div class="styled-radio-group">
+                            <input type="radio" id="dc_encodeurs" name="moteurs" value="DC + Encodeurs" required> 
+                            <label for="dc_encodeurs" class="styled-radio">Moteurs DC + Encodeurs</label>
+                            
+                            <input type="radio" id="servos" name="moteurs" value="Servomoteurs"> 
+                            <label for="servos" class="styled-radio">Servomoteurs continus</label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label for="verrouillage">3. Verrouillage des Casiers / Mécanisme de Gâchette</label>
+                        <input type="text" id="verrouillage" name="verrouillage" placeholder="Ex: Électroaimant, Servomoteur, Gâchette électronique/mécanique" required>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h3><i class="fas fa-shield-alt"></i> E. Sécurité et Gestion des Erreurs</h3>
+
+                    <div class="question">
+                        <label for="securite_physique">1. Sécurité Physique (Obstacles)</label>
+                        <select id="securite_physique" name="securite_physique" required>
+                            <option value="">Choisir capteur...</option>
+                            <option value="Ultrasons">Capteurs Ultrasons (HC-SR04)</option>
+                            <option value="LiDAR">LiDAR (Plus précis)</option>
+                            <option value="Infrarouge">Infrarouge (Courte portée)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question">
+                        <label for="duree_code">2. Durée de vie du Code / Maintenance</label>
+                        <input type="text" id="duree_code" name="duree_code" placeholder="Ex: Mise à jour OTA, Tests unitaires, Documentation" required>
+                    </div>
+
+                    <div class="question">
+                        <label for="tentatives_erronees">3. Tentatives Erronées (avant alerte)</label>
+                        <input type="number" id="tentatives_erronees" name="tentatives_erronees" min="1" placeholder="Nombre de tentatives avant alerte" required>
+                    </div>
+                </section>
+                
+                <section class="section feedback-section">
+                    <h3><i class="fas fa-comment-dots"></i> F. Questions et Suggestions de l'Équipe</h3>
+                    
+                    <div class="question">
+                        <label for="feedback">Avez-vous des questions, des points techniques que le questionnaire n'aborde pas, ou des suggestions ?</label>
+                        <textarea id="feedback" name="feedback" rows="6" placeholder="Écrivez vos commentaires ici..."></textarea>
+                    </div>
+                </section>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Soumettre le Rapport Technique
+                </button>
+            </form>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <p>Développé par <span class="footer-attribution">Max_Adis</span> pour le projet <span class="footer-project">SERVI-BOT</span></p>
+    </footer>
+
+    <script>
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observer toutes les sections et questions
+        document.querySelectorAll('.section, .question').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Gestion du slider
+        const precisionSlider = document.getElementById('precision_necessaire');
+        const precisionValueSpan = document.getElementById('precision-value');
+        
+        precisionValueSpan.textContent = precisionSlider.value + " cm";
+
+        precisionSlider.addEventListener('input', function() {
+            precisionValueSpan.textContent = this.value + " cm";
+        });
+
+        // Soumission du formulaire avec feedback visuel
+        const form = document.getElementById('serviBotForm');
+        const submitBtn = form.querySelector('.submit-button');
+        
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            // Animation de chargement
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            const data = new FormData(form);
+            const action = e.target.action;
+            
+            fetch(action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Soumis avec succès !';
+                    submitBtn.style.background = 'var(--success-color)';
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Soumettre le Rapport Technique';
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        // Réinitialiser la valeur du slider
+                        precisionValueSpan.textContent = precisionSlider.value + " cm";
+                    }, 2000);
+                } else {
+                    throw new Error('Erreur serveur');
+                }
+            }).catch(error => {
+                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erreur - Réessayer';
+                submitBtn.disabled = false;
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Soumettre le Rapport Technique';
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
